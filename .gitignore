@@ -1,0 +1,8 @@
+# Ignore a pasta node_modules
+node_modules/
+
+# Ignore arquivos de sistema do macOS
+.DS_Store
+
+# Ignore arquivos de sistema do Windows
+Thumbs.db
