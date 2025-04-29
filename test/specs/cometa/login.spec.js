@@ -1,3 +1,5 @@
+import { addScreenshotToAllure } from "../../../helpers/allureHelper";
+
 describe('Teste de Login - Cometa', () => {
   const timeout = 10000; // Tempo de espera em milissegundos
   
@@ -13,6 +15,9 @@ describe('Teste de Login - Cometa', () => {
     await enterBtn.waitForClickable({ timeout });
 
     expect(await enterBtn.isDisplayed()).toBe(true);
+
+    const printEnterBtn = await browser.takeScreenshot();
+    await addScreenshotToAllure('Botão Entrar', printEnterBtn);
 
     // Clicar no botão 'Entrar'
     await enterBtn.click();
