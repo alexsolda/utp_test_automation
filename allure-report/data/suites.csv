@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","29442","should allow user to log in","","Tue Apr 29 16:17:35 BRT 2025","passed","Tue Apr 29 16:18:05 BRT 2025","","Teste de Login - Cometa","",""
+"","39440","deve permitir que o usuário realize o Login","","Wed Apr 30 11:52:53 BRT 2025","passed","Wed Apr 30 11:53:33 BRT 2025","","Teste de Login - Cometa","",""

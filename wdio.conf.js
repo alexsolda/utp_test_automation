@@ -1,4 +1,3 @@
-import allureReporter from '@wdio/allure-reporter';
 
 export const config = {
     //
@@ -133,7 +132,7 @@ export const config = {
         ['allure', {
             outputDir: 'allure-results',
             disableWebdriverStepsReporting: true,
-            disableWebdriverScreenshotsReporting: false,
+            disableWebdriverScreenshotsReporting: true,
         }]
     ],
 
@@ -146,14 +145,14 @@ export const config = {
     before: function (capabilities, specs) {
         require('ts-node').register({ files: true });
     },
-    afterTest: async function (test, context, { error }) {
-        const screenshot = await browser.takeScreenshot();
-        allureReporter.addAttachment(
-          'Screenshot',
-          Buffer.from(screenshot, 'base64'),
-          'image/png'
-        );
-      }
+    // afterTest: async function (test, context, { error }) {
+    //     const screenshot = await browser.takeScreenshot();
+    //     allureReporter.addAttachment(
+    //       'Screenshot',
+    //       Buffer.from(screenshot, 'base64'),
+    //       'image/png'
+    //     );
+    //   }
     //
     // =====
     // Hooks
