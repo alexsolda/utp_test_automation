@@ -1,11 +1,41 @@
 import { addAttachment } from '@wdio/allure-reporter';
-import { addScreenshotToAllure } from "../../../helpers/allureHelper";
-import LoginPage from "../../pageobjects/LoginPage";
+import { addScreenshotToAllure } from "../../../../helpers/allureHelper";
+import LoginPage from "../../../pageobjects/LoginPage";
 
-describe('Teste de Login - Cometa', () => {
-  const timeout = 10000; // Tempo de espera em milissegundos
+
+describe('Teste de Login (falha) - Cometa', () => {
+  it('não deve permitir login com credenciais inválidas', async () => {
+    const timeout = 10000; // Tempo de espera em milissegundos
+
+    await LoginPage.openLogin('cometa');
+
+    await LoginPage.enterButton.waitForDisplayed({ timeout });
+    await LoginPage.enterButton.waitForClickable({ timeout });
+    await LoginPage.enterButton.click();
+
+    await LoginPage.emailInput.waitForDisplayed({ timeout });
+    await LoginPage.passwordInput.waitForDisplayed({ timeout });
+    await LoginPage.loginButton.waitForDisplayed({ timeout });
+
+    await LoginPage.login('31274324025', 'teste1234');
+
+    const errorMessageElement = await $('[data-js="login-error-message"] label');
+    await errorMessageElement.waitForDisplayed({ timeout });
+
+    const errorMessageText = await errorMessageElement.getText();
+    expect(errorMessageText).toContain('O email ou senha inseridos não constam em nosso cadastro. Digite novamente o email e senha ou efetue o cadastro abaixo.'); 
+
+    const errorScreenshot = await browser.takeScreenshot();
+    await addScreenshotToAllure('Mensagem de erro de login', errorScreenshot);
+  });
+});
+
+describe('Teste de Login (sucesso) - Cometa', () => {
   
   it('deve permitir que o usuário realize o Login', async () => {
+
+    const timeout = 10000; // Tempo de espera em milissegundos
+
     // Acessar a página inicial
     await LoginPage.openLogin('cometa');
 

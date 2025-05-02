@@ -26,14 +26,19 @@ class LoginPage {
     await this.emailInput.setValue(email);
     await this.passwordInput.setValue(password);
   
-    // Aguarda o botão ficar habilitado
-    await browser.waitUntil(
-      async () => await this.loginButton.isEnabled(),
-      {
-        timeout: 5000,
-        timeoutMsg: 'Botão de login não ficou habilitado após preencher os campos',
-      }
-    );
+    try {
+      await browser.waitUntil(
+        async () => await this.loginButton.isEnabled(),
+        {
+          timeout: 5000,
+          timeoutMsg: 'Botão de login não ficou habilitado após preencher os campos',
+        }
+      );
+    } catch (error) {
+      const screenshot = await browser.takeScreenshot();
+      await addScreenshotToAllure('Botão de login não habilitado', screenshot);
+      throw error; // relança o erro original para falhar o teste
+    }
   
     await this.loginButton.click();
   }
@@ -42,6 +47,7 @@ class LoginPage {
     return await browser.waitUntil(
       async () => {
         const passenger = await browser.execute(() => sessionStorage.getItem('passenger'));
+        console.log(passenger);
         return passenger !== null && passenger.trim() !== '';
       },
       {

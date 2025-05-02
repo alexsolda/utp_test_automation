@@ -1,1 +1,1 @@
-[{"uid":"725a7b282417be50","name":"deve permitir que o usuário realize o Login","time":{"start":1746024773996,"stop":1746024813436,"duration":39440},"status":"passed","severity":"normal"}]
+[{"uid":"91ff3f9831b28a92","name":"não deve permitir login com credenciais inválidas","time":{"start":1746189217537,"stop":1746189240529,"duration":22992},"status":"passed","severity":"normal"},{"uid":"fe1be7708401a05e","name":"deve permitir que o usuário realize o Login","time":{"start":1746189240529,"stop":1746189245529,"duration":5000},"status":"passed","severity":"normal"}]

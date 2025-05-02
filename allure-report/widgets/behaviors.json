@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"112a5ec5b8c6f235b45b9cb2fe0ec641","name":"Teste de Login - Cometa","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
+{"total":2,"items":[{"uid":"4880685884a150f8de28c9278b2a8a63","name":"Teste de Login (falha) - Cometa","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}},{"uid":"a584ad32f8d8279642863ffc6283e375","name":"Teste de Login (sucesso) - Cometa","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
