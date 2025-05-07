@@ -1,43 +1,49 @@
 import { addAttachment } from '@wdio/allure-reporter';
 import { addScreenshotToAllure } from "../../../../helpers/allureHelper";
+import { cometaUTP, timeout } from '../../../../helpers/globalHelper';
 import LoginPage from "../../../pageobjects/LoginPage";
 
 
 describe('Teste de Login (falha) - Cometa', () => {
   it('não deve permitir login com credenciais inválidas', async () => {
-    const timeout = 10000; // Tempo de espera em milissegundos
+      try {
 
-    await LoginPage.openLogin('cometa');
+        await LoginPage.openLogin(cometaUTP);
+  
+        await LoginPage.enterButton.waitForDisplayed({ timeout });
+        await LoginPage.enterButton.waitForClickable({ timeout });
+        await LoginPage.enterButton.click();
+  
+        await LoginPage.emailInput.waitForDisplayed({ timeout });
+        await LoginPage.passwordInput.waitForDisplayed({ timeout });
+        await LoginPage.loginButton.waitForDisplayed({ timeout });
+  
+        await LoginPage.login('31274324025', 'teste1234');
+  
+        const errorMessageElement = await $('[data-js="login-error-message"] label');
+        await errorMessageElement.waitForDisplayed({ timeout });
+  
+        const errorMessageText = await errorMessageElement.getText();
+        expect(errorMessageText).toContain('O email ou senha inseridos não constam em nosso cadastro. Digite novamente o email e senha ou efetue o cadastro abaixo.'); 
+  
+        const errorScreenshot = await browser.takeScreenshot();
+        await addScreenshotToAllure(`Mensagem de erro de login - ${cometaUTP}`, errorScreenshot);
 
-    await LoginPage.enterButton.waitForDisplayed({ timeout });
-    await LoginPage.enterButton.waitForClickable({ timeout });
-    await LoginPage.enterButton.click();
-
-    await LoginPage.emailInput.waitForDisplayed({ timeout });
-    await LoginPage.passwordInput.waitForDisplayed({ timeout });
-    await LoginPage.loginButton.waitForDisplayed({ timeout });
-
-    await LoginPage.login('31274324025', 'teste1234');
-
-    const errorMessageElement = await $('[data-js="login-error-message"] label');
-    await errorMessageElement.waitForDisplayed({ timeout });
-
-    const errorMessageText = await errorMessageElement.getText();
-    expect(errorMessageText).toContain('O email ou senha inseridos não constam em nosso cadastro. Digite novamente o email e senha ou efetue o cadastro abaixo.'); 
-
-    const errorScreenshot = await browser.takeScreenshot();
-    await addScreenshotToAllure('Mensagem de erro de login', errorScreenshot);
-  });
+    } catch (error) {
+        const screenshot = await browser.takeScreenshot();
+        await addScreenshotToAllure(`Falha inesperada - ${cometaUTP}`, screenshot);
+        throw error;  // Rejoga o erro para o teste falhar corretamente
+    }
+    });
 });
 
 describe('Teste de Login (sucesso) - Cometa', () => {
   
   it('deve permitir que o usuário realize o Login', async () => {
 
-    const timeout = 10000; // Tempo de espera em milissegundos
-
-    // Acessar a página inicial
-    await LoginPage.openLogin('cometa');
+    try {
+      // Acessar a página inicial
+    await LoginPage.openLogin(cometaUTP);
 
     const errorModal = await $('[data-js="main-msg"]');
     const isModalDisplayed = await errorModal.isDisplayed().catch(() => false);
@@ -47,7 +53,7 @@ describe('Teste de Login (sucesso) - Cometa', () => {
 
       if (modalText.includes('Houve uma falha na requisição. Tente novamente mais tarde.')) {
         const modalScreenshot = await browser.takeScreenshot();
-        await addScreenshotToAllure('Falha na requisição', modalScreenshot);
+        await addScreenshotToAllure(`Falha na requisição - ${cometaUTP}`, modalScreenshot);
         throw new Error(`Teste interrompido: modal com mensagem de erro detectado - "${modalText}"`);
       }
     }
@@ -59,7 +65,7 @@ describe('Teste de Login (sucesso) - Cometa', () => {
     expect(await LoginPage.enterButton.isDisplayed()).toBe(true);
 
     const printEnterBtn = await browser.takeScreenshot();
-    await addScreenshotToAllure('Botão Entrar', printEnterBtn);
+    await addScreenshotToAllure(`Botão Entrar - ${cometaUTP}`, printEnterBtn);
 
     // Clicar no botão 'Entrar'
     await LoginPage.enterButton.click();
@@ -75,7 +81,7 @@ describe('Teste de Login (sucesso) - Cometa', () => {
     expect(await LoginPage.loginButton.isDisplayed()).toBe(true);
 
     const loginForm = await browser.takeScreenshot();
-    await addScreenshotToAllure('Dropdown login', loginForm);
+    await addScreenshotToAllure(`Dropdown login - ${cometaUTP}`, loginForm);
 
     await LoginPage.login('31274324025', 'teste123');
 
@@ -83,6 +89,11 @@ describe('Teste de Login (sucesso) - Cometa', () => {
     expect(passengerExists).toBe(true);
 
     const passengerValue = await browser.execute(() => sessionStorage.getItem('passenger'));
-    addAttachment('Valor de passenger no sessionStorage', passengerValue, 'text/plain');
+    addAttachment(`Valor de passenger no sessionStorage - ${cometaUTP}`, passengerValue, 'text/plain');
+    } catch (error) {
+        const modalScreenshot = await browser.takeScreenshot();
+        await addScreenshotToAllure(`Falha na requisição - ${cometaUTP}`, modalScreenshot);
+        throw new Error(`Teste interrompido: modal com mensagem de erro detectado - "${modalText}"`);
+    }
   });
 });

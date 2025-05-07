@@ -1,3 +1,5 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","5000","deve permitir que o usuário realize o Login","","Fri May 02 09:34:00 BRT 2025","passed","Fri May 02 09:34:05 BRT 2025","","Teste de Login (sucesso) - Cometa","",""
-"","22992","não deve permitir login com credenciais inválidas","","Fri May 02 09:33:37 BRT 2025","passed","Fri May 02 09:34:00 BRT 2025","","Teste de Login (falha) - Cometa","",""
+"","1231","deve permitir que o usuário realize o Login","","Wed May 07 15:55:09 BRT 2025","broken","Wed May 07 15:55:10 BRT 2025","","Teste de Login (sucesso) - Cometa","",""
+"","5365","deve permitir que o usuário realize o Login","","Wed May 07 15:54:19 BRT 2025","passed","Wed May 07 15:54:24 BRT 2025","","Teste de Login (sucesso) - Expresso sul","",""
+"","43631","não deve permitir login com credenciais inválidas","","Wed May 07 15:53:35 BRT 2025","passed","Wed May 07 15:54:19 BRT 2025","","Teste de Login (falha) - Expresso sul","",""
+"","34528","não deve permitir login com credenciais inválidas","","Wed May 07 15:54:34 BRT 2025","broken","Wed May 07 15:55:09 BRT 2025","","Teste de Login (falha) - Cometa","",""

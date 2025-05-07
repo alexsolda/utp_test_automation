@@ -1,3 +1,5 @@
 "BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
-"0","","0","Teste de Login (sucesso) - Cometa","1","0","","0"
-"0","","0","Teste de Login (falha) - Cometa","1","0","","0"
+"1","","0","Teste de Login (sucesso) - Cometa","0","0","","0"
+"0","","0","Teste de Login (sucesso) - Expresso sul","1","0","","0"
+"0","","0","Teste de Login (falha) - Expresso sul","1","0","","0"
+"1","","0","Teste de Login (falha) - Cometa","0","0","","0"
