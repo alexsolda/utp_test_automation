@@ -1,3 +1,5 @@
+import allureReporter from '@wdio/allure-reporter';
+
 class LoginPage {
   get enterButton() {
     return $('[data-js="header-login-button"]');
@@ -25,6 +27,8 @@ class LoginPage {
   
     await this.emailInput.setValue(email);
     await this.passwordInput.setValue(password);
+
+    allureReporter.addAttachment('Dados de Login', `Email: ${email}\nSenha: ${password}`);
   
     try {
       await browser.waitUntil(
