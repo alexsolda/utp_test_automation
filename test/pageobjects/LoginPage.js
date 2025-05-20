@@ -51,7 +51,6 @@ class LoginPage {
     return await browser.waitUntil(
       async () => {
         const passenger = await browser.execute(() => sessionStorage.getItem('passenger'));
-        console.log(passenger);
         return passenger !== null && passenger.trim() !== '';
       },
       {

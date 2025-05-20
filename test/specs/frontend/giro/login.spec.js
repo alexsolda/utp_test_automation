@@ -6,7 +6,7 @@ const {
   url: BRAND_URL, 
   login: BRAND_LOGIN, 
   password: BRAND_PASSWORD 
-} = brandConfig.viacao1001;
+} = brandConfig.giro;
 
 
 describe(`Teste de Login - ${BRAND_NAME}`, () => {

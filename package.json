@@ -10,6 +10,7 @@
   },
   "scripts": {
     "wdio": "wdio run ./wdio.conf.js",
+    "clear:cache": "rm -rf .cache",
     "allure:report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
