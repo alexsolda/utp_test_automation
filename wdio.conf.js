@@ -1,4 +1,4 @@
-import allureReporter from '@wdio/allure-reporter';
+const env = process.env.ENV;
 
 export const config = {
     //
@@ -23,9 +23,8 @@ export const config = {
     // The path of the spec files will be resolved relative from the directory of
     // of the config file unless it's absolute.
     //
-    specs: [
-        './test/specs/**/*.js'
-    ],
+    baseUrl: process.env.BASE_URL,
+    specs: [process.env.SPEC],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -89,7 +88,6 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://jca.ofactory.biz',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -117,7 +115,7 @@ export const config = {
     
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    specFileRetries: 1,
     //
     // Delay in seconds between the spec file retry attempts
     // specFileRetriesDelay: 0,
@@ -133,7 +131,7 @@ export const config = {
         ['allure', {
             outputDir: 'allure-results',
             disableWebdriverStepsReporting: true,
-            disableWebdriverScreenshotsReporting: false,
+            disableWebdriverScreenshotsReporting: true,
         }]
     ],
 
@@ -146,14 +144,14 @@ export const config = {
     before: function (capabilities, specs) {
         require('ts-node').register({ files: true });
     },
-    afterTest: async function (test, context, { error }) {
-        const screenshot = await browser.takeScreenshot();
-        allureReporter.addAttachment(
-          'Screenshot',
-          Buffer.from(screenshot, 'base64'),
-          'image/png'
-        );
-      }
+    // afterTest: async function (test, context, { error }) {
+    //     const screenshot = await browser.takeScreenshot();
+    //     allureReporter.addAttachment(
+    //       'Screenshot',
+    //       Buffer.from(screenshot, 'base64'),
+    //       'image/png'
+    //     );
+    //   }
     //
     // =====
     // Hooks

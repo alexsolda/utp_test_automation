@@ -6,10 +6,18 @@
     "@wdio/cli": "^9.12.7",
     "@wdio/local-runner": "^9.12.7",
     "@wdio/mocha-framework": "^9.12.6",
-    "@wdio/spec-reporter": "^9.12.6"
+    "@wdio/spec-reporter": "^9.12.6",
+    "cross-env": "^7.0.3"
   },
   "scripts": {
     "wdio": "wdio run ./wdio.conf.js",
-    "allure:report": "allure generate allure-results --clean && allure open"
-}
+    "test:all": "node run-brands.js -- --brand=cometa,catarinense,viacao1001,rapidoribeirao,expressosul,outlet,wemobi,giro --env=aem",
+    "clear:cache": "rm -rf .cache",
+    "allure:report": "allure generate allure-results --clean && allure open",
+
+    "test:exp": "node run-brands.js -- --brand=cometa,catarinense --env=aem && npm run allure:report"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
 }
