@@ -8,7 +8,7 @@ export async function loginFailureTest(brandName, url, login, password) {
 
     await LoginPage.openLogin(url);
 
-    await removeChromeExtension();
+    await removeChromeExtension(brandName);
 
     await LoginPage.enterButton.waitForDisplayed({ timeout });
     await LoginPage.enterButton.waitForClickable({ timeout });
@@ -54,7 +54,7 @@ export async function loginSuccessTest(brandName, url, login, password) {
       }
     }
 
-    await removeChromeExtension();
+    await removeChromeExtension(brandName);
 
     await LoginPage.enterButton.waitForDisplayed({ timeout });
     await LoginPage.enterButton.waitForClickable({ timeout });
@@ -85,7 +85,7 @@ export async function loginSuccessTest(brandName, url, login, password) {
   }
 }
 
-export async function removeChromeExtension() {
+export async function removeChromeExtension(brand) {
    await browser.execute(() => {
     const hideElement = (selector) => {
       const el = document.querySelector(selector);
@@ -105,6 +105,10 @@ export async function removeChromeExtension() {
           document.querySelector('#contexthub-ui-iframe') === null
         );
       });
+      if(exists) {
+        const contexthub = await browser.takeScreenshot();
+        await addScreenshotToAllure(`Barra AEM - ${brand}`, contexthub);
+      }
       return exists === true;
     },
     {

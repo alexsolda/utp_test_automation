@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const timeout = process.env.TIMEOUT || 30000;
+export const timeout = process.env.TIMEOUT || 10000;
 
 export const brandConfig = {
     catarinense: {

@@ -1,5 +1,7 @@
 import allureReporter from '@wdio/allure-reporter';
 
+const baseUrl = process.env.BASE_URL;
+
 class LoginPage {
   get enterButton() {
     return $('[data-js="header-login-button"]');
@@ -17,8 +19,9 @@ class LoginPage {
     return $('[data-js="button-login"]');
   }
 
-  openLogin(brand) {
-    return browser.url(`/${brand}`);
+  openLogin(query) {
+
+    return browser.url(`${baseUrl}${query}`);
   }
 
   async login(email, password) {
